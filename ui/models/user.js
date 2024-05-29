@@ -15,25 +15,25 @@ const userSchema = new mongoose.Schema(
       index: true,
       lowercase: true,
       unique: true,
-      minLength: 5
+      minLength: 5,
     },
     password: String,
     role: {
       type: String,
-      default: "user"
+      default: "user",
     },
     image: String,
     resetCode: {
       data: String,
       expiresAt: {
         type: Date,
-        default: () => new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
-      }
-    }
+        default: () => new Date(Date.now() + 10 * 60 * 1000), // 10 minutes
+      },
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-userSchema.plugin(uniqueValidator)
+userSchema.plugin(uniqueValidator);
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

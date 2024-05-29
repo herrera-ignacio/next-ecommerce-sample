@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && npx prettier. --write"
+    "lint": "next lint && npx prettier . --write"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
