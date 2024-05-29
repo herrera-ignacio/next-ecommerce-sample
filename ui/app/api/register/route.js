@@ -10,12 +10,12 @@ export async function POST(req) {
   const { name, email, password } = body;
 
   try {
-    const user = await new User({
+    await new User({
       name,
       email,
       password: await bcrypt.hash(password, 10),
     }).save();
-    return NextResponse.json(user);
+    return NextResponse.json({ success: "Registered successfully" });
   } catch (err) {
     return NextResponse.json({ err: err.message }, { status: 500 });
   }

@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -7,12 +9,33 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
+      const response = await fetch(`${process.env.API}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.err);
+      } else {
+        toast.success(data.success);
+        router.push("/login");
+      }
     } catch (err) {
-      console.error(err);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -52,7 +75,7 @@ export default function Register() {
                 className="btn btn-primary btn-raised"
                 disabled={loading || !name || !email || !password}
               >
-                Submit
+                {loading ? "Please wait..." : "Submit"}
               </button>
             </form>
           </div>
