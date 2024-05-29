@@ -10,14 +10,30 @@ export default function TopNav() {
         NEXT EcomNext
       </Link>
 
-      <div className="d-flex">
-        <Link href="/login" className="nav-link">
-          Login
-        </Link>
-        <Link href="/register" className="nav-link">
-          Register
-        </Link>
-      </div>
+      {status === "authenticated" ? (
+        <>
+          <Link href="/dashboard/user" className="nav-link">
+            {data?.user?.name}
+          </Link>
+          <a
+            className="nav-link pointer"
+            onClick={() => signOut({ callbackUrl: "/login" })}
+          >
+            Logout
+          </a>
+        </>
+      ) : status === "loading" ? (
+        <span className="nav-link text-danger">Loading...</span>
+      ) : (
+        <div className="d-flex">
+          <Link href="/login" className="nav-link">
+            Login
+          </Link>
+          <Link href="/register" className="nav-link">
+            Register
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
