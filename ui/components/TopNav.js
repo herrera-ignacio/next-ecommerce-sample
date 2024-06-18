@@ -4,6 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 
 export default function TopNav() {
   const { data, status, loading } = useSession();
+  console.log(data?.user);
 
   return (
     <nav className="nav shadow p-2 justify-content-between mb-3">
@@ -12,8 +13,11 @@ export default function TopNav() {
       </Link>
 
       {status === "authenticated" ? (
-        <>
-          <Link href="/dashboard/user" className="nav-link">
+        <div className="d-flex justify-content-end">
+          <Link
+            href={`/dashboard/${data?.user?.role === "admin" ? "admin" : "user"}`}
+            className="nav-link"
+          >
             {data?.user?.name}
           </Link>
           <a
@@ -22,7 +26,7 @@ export default function TopNav() {
           >
             Logout
           </a>
-        </>
+        </div>
       ) : status === "loading" ? (
         <span className="nav-link text-danger">Loading...</span>
       ) : (

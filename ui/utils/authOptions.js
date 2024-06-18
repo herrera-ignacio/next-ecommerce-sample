@@ -33,6 +33,35 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user }) {
+      const { email, name, image } = user;
+      await dbConnect();
+
+      let dbUser = await User.findOne({ email });
+
+      if (!dbUser) {
+        dbUser = await User.create({
+          email,
+          name,
+          image,
+        });
+      }
+
+      return true;
+    },
+    jwt: async ({ token }) => {
+      const userByEmail = await User.findOne({ email: token.email });
+      userByEmail.password = undefined;
+      userByEmail.resetCode = undefined;
+      token.user = userByEmail;
+      return token;
+    },
+    session: ({ session, token }) => {
+      session.user = token.user;
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
