@@ -59,7 +59,7 @@ export const CategoryProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify(updatingCategory),
       });
       const data = await res.json();
 

@@ -1,22 +1,11 @@
-import CategoryCreate from "@/components/category/CategoryCreate";
-import CategoryList from "@/components/category/CategoryList";
+import AdminCategoryCreate from "@/components/category/AdminCategoryCreate";
+import AdminCategoryList from "@/components/category/AdminCategoryList";
 
 export default function AdminCategory() {
   return (
     <div className="container mb-5">
-      <div className="row">
-        <div className="col">
-          <p className="lead">Crear categoría</p>
-          <CategoryCreate />
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col">
-          <p className="lead">Lista de categorías</p>
-          <CategoryList />
-        </div>
-      </div>
+      <AdminCategoryCreate />
+      <AdminCategoryList />
     </div>
   );
 }
