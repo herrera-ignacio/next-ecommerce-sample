@@ -27,7 +27,8 @@ export default function Login() {
       if (result?.error) {
         toast.error(result.error);
       } else {
-        toast.success("Logged in successfully");
+        toast.success("Login exitoso");
+        // TODO redirect to dashboard if no callbackUrl
         router.push(callbackUrl);
       }
     } catch (err) {
@@ -50,14 +51,14 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-control mb-4"
-                placeholder="Enter your email"
+                placeholder="Ingresa tu email"
               />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-control mb-4"
-                placeholder="Enter your password"
+                placeholder="Ingresa tu contraseña"
               />
 
               <button
@@ -72,7 +73,7 @@ export default function Login() {
               className="btn btn-danger btn-raised mb-4"
               onClick={() => signIn("google", { callbackUrl })}
             >
-              Sign in with Google
+              Ingresar con Google
             </button>
           </div>
         </div>

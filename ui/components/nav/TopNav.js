@@ -4,12 +4,11 @@ import { useSession, signOut } from "next-auth/react";
 
 export default function TopNav() {
   const { data, status, loading } = useSession();
-  console.log(data?.user);
 
   return (
     <nav className="nav shadow p-2 justify-content-between mb-3">
       <Link href="/" className="nav-link">
-        NEXT EcomNext
+        Recommerce
       </Link>
 
       {status === "authenticated" ? (
@@ -35,7 +34,7 @@ export default function TopNav() {
             Login
           </Link>
           <Link href="/register" className="nav-link">
-            Register
+            Registrarse
           </Link>
         </div>
       )}

@@ -20,13 +20,13 @@ export const authOptions = {
         const user = await User.findOne({ email });
 
         if (!user) {
-          throw new Error("Invalid credentials");
+          throw new Error("Credenciales incorrectas");
         }
 
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
         if (!isPasswordMatch) {
-          throw new Error("Invalid credentials");
+          throw new Error("Credenciales incorrectas");
         }
 
         return user;
